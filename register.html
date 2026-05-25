@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <main class="login-container">
+
+    <div class="card">
+      <h2>Registro Alumna</h2>
+
+      <form id="registerForm">
+        <input
+  type="email"
+  id="email"
+  placeholder="Email"
+  required
+>
+
+<input
+  type="password"
+  id="password"
+  placeholder="Contraseña"
+  required
+>
+        <input type="text" id="name" placeholder="Nombre completo" required>
+
+        <input type="number" id="age" placeholder="Edad" required>
+
+        <select id="gender" required>
+          <option value="">Sexo</option>
+          <option value="Femenino">Femenino</option>
+          <option value="Masculino">Masculino</option>
+          <option value="Otro">Otro</option>
+        </select>
+
+        <input type="text" id="experience" placeholder="Hace cuánto bailás" required>
+
+        <label>Estilos que manejás:</label>
+
+        <div class="checkbox-group">
+          <label><input type="checkbox" value="Hip Hop"> Hip Hop</label>
+          <label><input type="checkbox" value="House"> House</label>
+          <label><input type="checkbox" value="Popping"> Popping</label>
+          <label><input type="checkbox" value="Locking"> Locking</label>
+          <label><input type="checkbox" value="Dancehall"> Dancehall</label>
+          <label><input type="checkbox" value="Lite Feet"> Lite Feet</label>
+          <label><input type="checkbox" value="Krump"> Krump</label>
+          <label><input type="checkbox" value="Breaking"> Breaking</label>
+        </div>
+
+        <p id="message"></p>
+        
+        <button type="submit" class="btn">Guardar perfil</button>
+
+      </form>
+    </div>
+
+  </main>
+
+  <script type="module" src="js/login.js"></script>
+</body>
+</html>

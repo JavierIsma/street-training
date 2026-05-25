@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Alumna</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+  
+      <h2>Street Training</h2>
+  
+      <button class="menu-btn active" data-section="profileSection">
+        Perfil
+      </button>
+  
+      <button class="menu-btn" data-section="uploadSection">
+        Subir práctica
+      </button>
+  
+      <button class="menu-btn" data-section="practicesSection">
+        Mis prácticas
+      </button>
+  
+      <button class="menu-btn" data-section="statsSection">
+        Evolución
+      </button>
+  
+      <button id="logoutBtn" class="btn logout-btn">
+        Cerrar sesión
+      </button>
+  
+    </aside>
+  
+  
+    <!-- CONTENIDO -->
+    <main class="dashboard-content">
+  
+      <!-- PERFIL -->
+      <section id="profileSection" class="dashboard-section active-section">
+  
+        <div class="card">
+  
+          <h2>Perfil</h2>
+  
+          <div class="profile-avatar-container">
+  
+            <img
+              id="profileAvatar"
+              src="https://api.dicebear.com/7.x/fun-emoji/svg?seed=Sofia"
+              alt="Avatar"
+            >
+  
+            <input
+              type="file"
+              id="avatarInput"
+              accept="image/*"
+            >
+  
+            <label
+              for="avatarInput"
+              class="custom-upload-btn"
+            >
+              Cambiar foto
+            </label>
+  
+          </div>
+  
+          <div id="profileData"></div>
+  
+        </div>
+  
+      </section>
+  
+  
+      <!-- SUBIR PRACTICA -->
+      <section id="uploadSection" class="dashboard-section">
+  
+        <div class="card">
+  
+          <h2>Subir práctica</h2>
+  
+          <form id="practiceForm">
+  
+            <input
+              type="text"
+              id="videoLink"
+              placeholder="Link video práctica"
+              required
+            >
+  
+            <textarea
+              id="practiceNotes"
+              placeholder="Notas"
+            ></textarea>
+  
+            <button class="btn">
+              Guardar práctica
+            </button>
+  
+          </form>
+  
+        </div>
+  
+      </section>
+  
+  
+      <!-- PRACTICAS -->
+      <section id="practicesSection" class="dashboard-section">
+  
+        <div class="card">
+  
+          <h2>Mis prácticas</h2>
+  
+          <div id="practiceList"></div>
+  
+        </div>
+  
+      </section>
+  
+  
+      <!-- EVOLUCION -->
+      <section id="statsSection" class="dashboard-section">
+  
+        <div class="card">
+  
+          <h2>Evolución</h2>
+  
+          <div id="statsContainer"></div>
+  
+          <canvas id="progressChart"></canvas>
+  
+        </div>
+  
+      </section>
+  
+    </main>
+  
+  </div>
+  
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script type="module" src="js/dashboard.js"></script>
+</body>
+</html>

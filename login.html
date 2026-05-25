@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <main class="login-container">
+
+    <div class="card">
+
+      <h2>Iniciar Sesión</h2>
+
+      <form id="loginForm">
+
+        <input
+          type="email"
+          id="email"
+          placeholder="Email"
+          required
+        >
+
+        <div class="password-container">
+
+          <input
+            type="password"
+            id="password"
+            placeholder="Contraseña"
+          >
+        
+          <span id="togglePassword">
+            👁️
+          </span>
+        
+        </div>
+
+        <p id="message"></p>
+
+        <button type="submit" class="btn">
+          Ingresar
+        </button>
+
+      </form>
+
+      <br>
+
+      <a href="register.html">
+        ¿No tenés cuenta? Registrate
+      </a>
+
+    </div>
+
+  </main>
+
+  <script type="module" src="js/auth.js"></script>
+
+</body>
+</html>
