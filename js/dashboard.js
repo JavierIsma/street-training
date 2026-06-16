@@ -501,12 +501,33 @@ function initPracticesListener() {
               <p style="font-size: 0.9rem; margin-top: 5px; margin-bottom: 15px; color: #aaa; background: #121212; padding: 8px 12px; border-radius: 6px; border: 1px solid #222;">${practice.timestamps || 'Sin timestamps'}</p>
             </div>
 
-            ${practice.teacherVideoFeedback ? `
-              <div class="bloque-texto-feedback" style="margin-top: 15px; ${cVideo.style}">
-                <strong>Video Devolución:</strong>
-                <iframe width="100%" height="320" src="${practice.teacherVideoFeedback.replace('/view?usp=sharing', '/preview')}" allow="autoplay; fullscreen" allowfullscreen style="border-radius: 8px; border: 1px solid #2a2a2a; margin-top: 8px;"></iframe>
-              </div>
-            ` : ''}
+        ${practice.teacherVideoFeedback ? (() => {
+  // 1. Extraemos el ID del video de forma segura
+  let videoId = '';
+  const url = practice.teacherVideoFeedback;
+  if (url.includes('/d/')) {
+    videoId = url.split('/d/')[1].split('/')[0];
+  } else if (url.includes('id=')) {
+    videoId = url.split('id=')[1].split('&')[0];
+  }
+
+  // 2. Construimos la URL incrustada con parámetros de fuerza de interfaz limpios
+  // ?authuser=0 ayuda a evitar conflictos de cuentas y fuerza una sesión limpia
+  const embedUrl = `https://drive.google.com/file/d/${videoId}/preview?authuser=0`;
+
+  return `
+    <div class="bloque-texto-feedback" style="margin-top: 15px; ${cVideo.style}">
+      <strong>Video Devolución:</strong>
+      <div class="contenedor-video-interno">
+        <iframe 
+          src="${embedUrl}" 
+          allow="autoplay; fullscreen" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  `;
+})() : ''}
             
             ${botonEntendidoHTML}
           `
