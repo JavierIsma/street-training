@@ -8,144 +8,107 @@
 </head>
 <body>
 
+  <header class="mobile-header">
+    <button id="mobile-hamburger-btn" class="hamburger-btn">☰</button>
+    <span class="mobile-header-title">Dashboard Alumna</span>
+  </header>
+
   <div class="dashboard-layout">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-  
+    <aside class="sidebar" id="dashboardSidebar">
       <h2>Street Training</h2>
+      
+      <button class="menu-btn active" data-section="profileSection">Perfil</button>
+      <button class="menu-btn" data-section="uploadSection">Subir práctica</button>
+      <button class="menu-btn" data-section="practicesSection">Mis prácticas</button>
+      <button class="menu-btn" data-section="goalsSection">Objetivos del mes</button>
+      <button class="menu-btn" data-section="statsSection">Evolución</button>
   
-      <button class="menu-btn active" data-section="profileSection">
-        Perfil
-      </button>
-  
-      <button class="menu-btn" data-section="uploadSection">
-        Subir práctica
-      </button>
-  
-      <button class="menu-btn" data-section="practicesSection">
-        Mis prácticas
-      </button>
-  
-      <button class="menu-btn" data-section="statsSection">
-        Evolución
-      </button>
-  
-      <button id="logoutBtn" class="btn logout-btn">
-        Cerrar sesión
-      </button>
-  
+      <button id="logoutBtn" class="btn logout-btn">Cerrar sesión</button>
     </aside>
   
-  
-    <!-- CONTENIDO -->
     <main class="dashboard-content">
   
-      <!-- PERFIL -->
       <section id="profileSection" class="dashboard-section active-section">
-  
-        <div class="card">
-  
-          <h2>Perfil</h2>
-  
-          <div class="profile-avatar-container">
-  
-            <img
-              id="profileAvatar"
-              src="https://api.dicebear.com/7.x/fun-emoji/svg?seed=Sofia"
-              alt="Avatar"
-            >
-  
-            <input
-              type="file"
-              id="avatarInput"
-              accept="image/*"
-            >
-  
-            <label
-              for="avatarInput"
-              class="custom-upload-btn"
-            >
-              Cambiar foto
-            </label>
-  
+        <div class="card profile-card-layout">
+          <div class="profile-sidebar-block">
+            <div class="profile-avatar-container">
+              <img id="profileAvatar" src="https://api.dicebear.com/7.x/fun-emoji/svg?seed=Sofia" alt="Avatar">
+              <input type="file" id="avatarInput" accept="image/*">
+              <label for="avatarInput" class="custom-upload-btn">Cambiar foto</label>
+            </div>
           </div>
-  
-          <div id="profileData"></div>
-  
+          <div class="profile-info-block">
+            <h2>Información de Alumna</h2>
+            <div id="profileData" class="profile-grid-fields"></div>
+          </div>
         </div>
-  
       </section>
   
-  
-      <!-- SUBIR PRACTICA -->
       <section id="uploadSection" class="dashboard-section">
-  
         <div class="card">
-  
           <h2>Subir práctica</h2>
-  
           <form id="practiceForm">
-  
-            <input
-              type="text"
-              id="videoLink"
-              placeholder="Link video práctica"
-              required
-            >
-  
-            <textarea
-              id="practiceNotes"
-              placeholder="Notas"
-            ></textarea>
-  
-            <button class="btn">
-              Guardar práctica
-            </button>
-  
+            <input type="text" id="videoLink" placeholder="Link video práctica" required>
+            <textarea id="notes" placeholder="Notas de tu ejecución..."></textarea>
+            <button type="submit" class="btn">Guardar práctica</button>
           </form>
-  
         </div>
-  
       </section>
   
-  
-      <!-- PRACTICAS -->
       <section id="practicesSection" class="dashboard-section">
-  
         <div class="card">
-  
           <h2>Mis prácticas</h2>
-  
+          <div class="search-filter-container" style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px;">
+            <input type="text" id="searchPractice" placeholder="Buscar práctica por nombre..." style="width: 100%; background: #111; border: 1px solid #333; color: white; padding: 12px; border-radius: 12px; font-size: 0.95rem; outline: none;">
+            <div id="filterCategoryBadges" class="category-badges-filters"></div>
+          </div>
           <div id="practiceList"></div>
-  
         </div>
-  
       </section>
   
-  
-      <!-- EVOLUCION -->
-      <section id="statsSection" class="dashboard-section">
-  
-        <div class="card">
-  
-          <h2>Evolución</h2>
-  
-          <div id="statsContainer"></div>
-  
-          <canvas id="progressChart"></canvas>
-  
+      <section id="goalsSection" class="dashboard-section">
+        <div class="card metas-container" style="border: 1px solid #2a2a2a; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <span style="color: #aaa; font-size: 0.9rem; display: block; margin-bottom: 4px;">Seleccionar Período:</span>
+              <select id="filterStudentMonth" style="background: #111; border: 1px solid #444; color: #8b5cf6; padding: 8px 14px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; outline: none;"></select>
+            </div>
+            <div style="text-align: right;">
+              <h3 style="margin: 0; font-size: 1.4rem; font-weight: 600; color: #8b5cf6;">Mis Objetivos</h3>
+              <span id="goalsPercentage" style="font-size: 0.95rem; color: #aaa; font-weight: 500;">0%</span>
+            </div>
+          </div>
+          <div style="width: 100%; height: 8px; background: #222; border-radius: 10px; margin-bottom: 25px; overflow: hidden; border: 1px solid #333;">
+            <div id="progressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #8b5cf6, #a78bfa); transition: width 0.4s ease;"></div>
+          </div>
+          <div id="studentGoalsList" style="display: flex; flex-direction: column; gap: 12px;"></div>
         </div>
+      </section>
   
+      <section id="statsSection" class="dashboard-section">
+        <div class="card">
+          <h2>Evolución</h2>
+          <div id="statsContainer"></div>
+          <div style="position: relative; height: 320px; width: 100%; margin-top: 20px;">
+            <canvas id="practiceChart"></canvas>
+          </div>
+        </div>
       </section>
   
     </main>
-  
+  </div>
+
+  <div id="successModal" class="custom-modal-overlay" style="display: none;">
+    <div class="custom-modal-card">
+      <div class="modal-icon-box">✨</div>
+      <h3>¡Práctica subida con éxito!</h3>
+      <p>Tu video ya está disponible para que el profesor realice la revisión.</p>
+      <button id="closeModalBtn" class="btn modal-btn-ok">Entendido</button>
+    </div>
   </div>
   
-  
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
   <script type="module" src="js/dashboard.js"></script>
 </body>
 </html>

@@ -4,14 +4,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <title>Login - Street Training</title>
 
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-  <main class="login-container">
+  <div class="bg-gradient-animated"></div>
+
+  <main class="login-container" style="max-width: 450px; margin: 60px auto; padding: 0 15px;">
 
     <div class="card">
 
@@ -19,40 +21,46 @@
 
       <form id="loginForm">
 
+        <label for="email" style="display: block; margin-bottom: 8px; font-weight: 500;">Correo Electrónico</label>
         <input
           type="email"
           id="email"
-          placeholder="Email"
+          placeholder="ejemplo@correo.com"
           required
         >
 
+        <label for="password" style="display: block; margin-bottom: 8px; font-weight: 500;">Contraseña</label>
         <div class="password-container">
-
           <input
             type="password"
             id="password"
-            placeholder="Contraseña"
+            placeholder="••••••••"
+            required
           >
-        
-          <span id="togglePassword">
-            👁️
-          </span>
-        
+          <span id="togglePassword">👁️</span>
         </div>
 
         <p id="message"></p>
 
-        <button type="submit" class="btn">
-          Ingresar
+        <button type="submit" class="btn" style="width: 100%; margin-top: 5px;">
+          Entrar
         </button>
+         
+      </form> <div style="margin-top: 15px; text-align: right;">
+        <a href="#" id="forgotPasswordBtn" style="color: #aaa; font-size: 0.85rem; text-decoration: none; transition: color 0.2s;">
+          ¿Te olvidaste la contraseña?
+        </a>
+      </div>
 
-      </form>
+      <p style="margin-top: 25px; text-align: center; color: #aaa; font-size: 0.95rem;">
+        ¿No tenés cuenta? <a href="register.html" style="color: #8b5cf6; font-weight: 600; text-decoration: none;">Registrate acá</a>
+      </p>
 
-      <br>
-
-      <a href="register.html">
-        ¿No tenés cuenta? Registrate
-      </a>
+      <div style="margin-top: 20px; border-top: 1px solid #2a2a2a; padding-top: 15px;">
+        <a href="index.html" class="btn secondary-btn" style="display: block; text-align: center; text-decoration: none; font-size: 0.9rem; padding: 10px;">
+          Volver al inicio
+        </a>
+      </div>
 
     </div>
 

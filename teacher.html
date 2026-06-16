@@ -8,6 +8,7 @@
   <title>Panel Profesor</title>
 
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -22,12 +23,96 @@
 
   <main class="dashboard-container">
 
-    <section class="card">
+    <section class="card" id="seccion-alumnas">
+      <h2>Sección Alumnas</h2>
+      <div id="alumnasGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; margin-top: 15px;">
+      </div>
+    </section>
 
-      <h2>Prácticas de alumnas</h2>
+    <section class="card" id="seccion-practicas" style="display: none;">
+      <button id="btnVolverAlumnas" class="btn" style="background: #333; color: #fff; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; margin-bottom: 20px; font-weight: bold;">
+        ← Volver a Alumnas
+      </button>
+
+      <div id="alumnaProfileCard" class="card" style="background: rgba(26, 26, 26, 0.85); border: 1px solid #2a2a2a; margin-bottom: 30px; display: none;">
+        <div class="profile-card-layout">
+          <div class="profile-sidebar-block">
+            <img id="alumnaAvatar" src="assets/default-avatar.png" alt="Foto de Alumna" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid #8b5cf6;">
+          </div>
+          <div class="profile-grid-fields">
+            <div class="info-field-box">
+              <span class="field-label">Nombre Alumna</span>
+              <p class="field-value" id="alumnaNameField">Cargando...</p>
+            </div>
+            <div class="info-field-box">
+              <span class="field-label">Edad</span>
+              <p class="field-value" id="alumnaAgeField">-- años</p>
+            </div>
+            <div class="info-field-box">
+              <span class="field-label">Experiencia</span>
+              <p class="field-value" id="alumnaExpField">--</p>
+            </div>
+            <div class="info-field-box full-width-field">
+              <span class="field-label">Estilos de Danza</span>
+              <div id="alumnaStylesContainer" class="profile-styles-container">
+                </div>
+            </div>
+            <div class="info-field-box full-width-field" id="bloqueMetasIniciales" style="display: none; background: rgba(139, 92, 246, 0.05); border-left: 3px solid #8b5cf6; margin-top: 10px;">
+              <span class="field-label" style="color: #a78bfa;">Mis metas al unirme</span>
+              <p class="field-value" id="alumnaMetasInicialesField" style="font-style: italic; font-size: 0.95rem; margin-top: 5px; color: #d5c5ff;">--</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <h2 id="nombreAlumnaTitulo" style="color: #4caf50; margin-bottom: 20px;">Prácticas de...</h2>
+
+      <div style="background: #111; padding: 20px; border-radius: 8px; border: 1px solid #333; margin-bottom: 30px;">
+        <h4 style="color: #fff; margin-top: 0; margin-bottom: 15px;">Evolución de Rendimiento</h4>
+        <div style="position: relative; height: 300px; width: 100%;">
+          <canvas id="practiceChartProfesor"></canvas>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: 30px; border: 1px solid #333; background: #111; padding: 20px; border-radius: 8px;">
+        <h3 style="color: #8b5cf6; margin-top: 0; margin-bottom: 15px; font-size: 1.2rem; font-weight: 600;">🎯 Planificación de Objetivos por Mes</h3>
+        
+        <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center;">
+          <input 
+            type="text" 
+            id="newGoalInput" 
+            placeholder="Ej: Trabajar la fluidez en transiciones de piso..." 
+            style="flex: 2; min-width: 200px; background: #1a1a1a; border: 1px solid #333; color: white; padding: 12px; border-radius: 8px; font-size: 0.95rem; outline: none;"
+          >
+          <select 
+            id="goalMonthSelect"
+            style="flex: 1; min-width: 140px; background: #1a1a1a; border: 1px solid #333; color: white; padding: 12px; border-radius: 8px; font-size: 0.95rem; cursor: pointer;"
+          >
+          </select>
+          <button 
+            id="addGoalBtn" 
+            class="btn" 
+            style="background: #8b5cf6; color: white; border: none; padding: 12px 20px; border-radius: 8px; font-weight: bold; cursor: pointer;"
+          >
+            Asignar
+          </button>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px; border-top: 1px solid #222; padding-top: 15px;">
+          <span style="color: #aaa; font-size: 0.9rem;">Visualizar objetivos del mes de:</span>
+          <select 
+            id="filterGoalMonth" 
+            style="background: #111; border: 1px solid #444; color: #8b5cf6; padding: 6px 12px; border-radius: 6px; font-weight: bold; cursor: pointer;"
+          >
+          </select>
+        </div>
+        
+        <div id="teacherGoalsList" style="display: flex; flex-direction: column; gap: 10px;">
+          <p style="color: #888; font-style: italic; font-size: 0.9rem;">Cargando objetivos de la alumna...</p>
+        </div>
+      </div>
 
       <div id="teacherPracticeList"></div>
-
     </section>
 
   </main>

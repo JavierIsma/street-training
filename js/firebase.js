@@ -10,7 +10,9 @@ import {
   } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
   
   import {
-    getFirestore,
+    initializeFirestore, // Cambiado getFirestore por initializeFirestore para configuración avanzada
+    persistentLocalCache, // Módulo para activar el almacenamiento local en disco
+    persistentMultipleTabManager, // Permite que el caché funcione aunque la alumna tenga varias pestañas abiertas
     setDoc,
     doc,
     getDoc,
@@ -20,7 +22,8 @@ import {
     where,
     getDocs,
     orderBy,
-    updateDoc
+    updateDoc,
+    onSnapshot
   } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
@@ -40,7 +43,12 @@ const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 
-export const db = getFirestore(app);
+// Inicializar Firestore con Caché Local Permanente habilitado
+export const db = initializeFirestore(app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentMultipleTabManager()
+  })
+});
 
 export {
     createUserWithEmailAndPassword,
@@ -56,5 +64,6 @@ export {
     where,
     getDocs,
     orderBy,
-    updateDoc
+    updateDoc,
+    onSnapshot
   };
