@@ -501,39 +501,30 @@ function initPracticesListener() {
               <p style="font-size: 0.9rem; margin-top: 5px; margin-bottom: 15px; color: #aaa; background: #121212; padding: 8px 12px; border-radius: 6px; border: 1px solid #222;">${practice.timestamps || 'Sin timestamps'}</p>
             </div>
 
-        ${practice.teacherVideoFeedback ? (() => {
-  // 1. Extraemos el ID del video de forma segura
-  let videoId = '';
-  const url = practice.teacherVideoFeedback;
-  if (url.includes('/d/')) {
-    videoId = url.split('/d/')[1].split('/')[0];
-  } else if (url.includes('id=')) {
-    videoId = url.split('id=')[1].split('&')[0];
-  }
-
-  // 2. Construimos la URL incrustada con parámetros de fuerza de interfaz limpios
-  // ?authuser=0 ayuda a evitar conflictos de cuentas y fuerza una sesión limpia
-  const embedUrl = `https://drive.google.com/file/d/${videoId}/preview?authuser=0`;
+          ${practice.teacherVideoFeedback ? (() => {
+  // Limpiamos el enlace para asegurarnos de que abra el visor oficial sin errores
+  const cleanUrl = practice.teacherVideoFeedback
+    .replace('/preview', '/view')
+    .split('?')[0]; // Eliminamos parámetros viejos si existen
 
   return `
     <div class="bloque-texto-feedback" style="margin-top: 15px; ${cVideo.style}">
       <strong>Video Devolución:</strong>
-      <div class="contenedor-video-interno">
-        <iframe 
-          src="${embedUrl}" 
-          allow="autoplay; fullscreen" 
-          allowfullscreen>
-        </iframe>
+      <div class="contenedor-link-video">
+        <p class="desc-video-info">Para ver la corrección con controles completos y pantalla completa en tu celular, tocá el botón de abajo:</p>
+        <a href="${cleanUrl}" target="_blank" class="btn-video-drive">
+          🎬 Ver Video Devolución
+        </a>
       </div>
     </div>
   `;
 })() : ''}
-            
-            ${botonEntendidoHTML}
-          `
-          : `<p style="color: #888; font-style: italic; margin-top: 10px;">Todavía no hay devolución del profesor.</p>`
-        }
-      `;
+              
+              ${botonEntendidoHTML}
+            `
+            : `<p style="color: #888; font-style: italic; margin-top: 10px;">Todavía no hay devolución del profesor.</p>`
+          }
+        `;
 
       let tarjetaExistente = document.getElementById(`card-${practiceId}`);
 
